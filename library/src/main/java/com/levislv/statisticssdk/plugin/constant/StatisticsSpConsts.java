@@ -2,6 +2,9 @@ package com.levislv.statisticssdk.plugin.constant;
 
 /**
  * @author levislv
+ * @email  levislv@levislv.com
+ * @blog   https://blog.levislv.com/
+ * @github https://github.com/levislv/
  */
 public interface StatisticsSpConsts {
     String SP_BOOLEAN_KEY_IS_APP_FIRST_ENTER = "sp_boolean_key_is_app_first_enter";

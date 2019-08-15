@@ -6,6 +6,9 @@ import ly.count.android.sdk.Countly;
 
 /**
  * @author levislv
+ * @email  levislv@levislv.com
+ * @blog   https://blog.levislv.com/
+ * @github https://github.com/levislv/
  */
 public class Statistics {
 

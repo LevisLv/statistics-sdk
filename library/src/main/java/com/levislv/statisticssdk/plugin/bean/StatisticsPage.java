@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 /**
  * @author levislv
+ * @email  levislv@levislv.com
+ * @blog   https://blog.levislv.com/
+ * @github https://github.com/levislv/
  */
 public class StatisticsPage implements Parcelable {
     public static final Creator<StatisticsPage> CREATOR = new Creator<StatisticsPage>() {

@@ -2,6 +2,9 @@ package com.levislv.statisticssdk.plugin.constant;
 
 /**
  * @author levislv
+ * @email  levislv@levislv.com
+ * @blog   https://blog.levislv.com/
+ * @github https://github.com/levislv/
  */
 public interface StatisticsTagConsts {
     interface Page {

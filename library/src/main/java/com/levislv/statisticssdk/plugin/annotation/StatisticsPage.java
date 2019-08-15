@@ -9,6 +9,9 @@ import java.lang.annotation.Target;
 
 /**
  * @author levislv
+ * @email  levislv@levislv.com
+ * @blog   https://blog.levislv.com/
+ * @github https://github.com/levislv/
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.CLASS)

@@ -10,6 +10,9 @@ import com.levislv.statisticssdk.plugin.constant.StatisticsTagConsts;
 
 /**
  * @author levislv
+ * @email  levislv@levislv.com
+ * @blog   https://blog.levislv.com/
+ * @github https://github.com/levislv/
  */
 public class StatisticsTouchUtils {
     public static StatisticsView findStatisticsViewByXY(Activity activity, String pkgName, float x, float y) {
