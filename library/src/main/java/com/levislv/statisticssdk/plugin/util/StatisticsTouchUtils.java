@@ -9,10 +9,11 @@ import com.levislv.statisticssdk.plugin.bean.StatisticsView;
 import com.levislv.statisticssdk.plugin.constant.StatisticsTagConsts;
 
 /**
- * @author levislv
+ * @author LevisLv
  * @email  levislv@levislv.com
  * @blog   https://blog.levislv.com/
- * @github https://github.com/levislv/
+ * @book   https://book.levislv.com/
+ * @github https://github.com/LevisLv/
  */
 public class StatisticsTouchUtils {
     public static StatisticsView findStatisticsViewByXY(Activity activity, String pkgName, float x, float y) {

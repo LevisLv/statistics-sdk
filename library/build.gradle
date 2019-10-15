@@ -5,7 +5,7 @@ group = 'com.github.LevisLv'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion '29.0.1'
+    buildToolsVersion '29.0.2'
 
     defaultConfig {
         minSdkVersion 18
@@ -25,7 +25,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 
-    api 'ly.count.android:sdk:19.02.3'
+    api 'ly.count.android:sdk:19.09'
 }

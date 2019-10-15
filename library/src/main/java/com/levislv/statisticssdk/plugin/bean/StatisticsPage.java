@@ -4,10 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * @author levislv
+ * @author LevisLv
  * @email  levislv@levislv.com
  * @blog   https://blog.levislv.com/
- * @github https://github.com/levislv/
+ * @book   https://book.levislv.com/
+ * @github https://github.com/LevisLv/
  */
 public class StatisticsPage implements Parcelable {
     public static final Creator<StatisticsPage> CREATOR = new Creator<StatisticsPage>() {

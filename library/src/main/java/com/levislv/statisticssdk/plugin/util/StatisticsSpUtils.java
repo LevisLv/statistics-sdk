@@ -12,10 +12,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author levislv
+ * @author LevisLv
  * @email  levislv@levislv.com
  * @blog   https://blog.levislv.com/
- * @github https://github.com/levislv/
+ * @book   https://book.levislv.com/
+ * @github https://github.com/LevisLv/
  */
 public class StatisticsSpUtils {
 

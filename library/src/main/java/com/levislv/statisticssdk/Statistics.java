@@ -3,12 +3,14 @@ package com.levislv.statisticssdk;
 import android.content.Context;
 
 import ly.count.android.sdk.Countly;
+import ly.count.android.sdk.CountlyConfig;
 
 /**
- * @author levislv
+ * @author LevisLv
  * @email  levislv@levislv.com
  * @blog   https://blog.levislv.com/
- * @github https://github.com/levislv/
+ * @book   https://book.levislv.com/
+ * @github https://github.com/LevisLv/
  */
 public class Statistics {
 
@@ -32,6 +34,10 @@ public class Statistics {
      */
     public void init(final Context context, final String serverUrl, final String appKey, final String deviceId) {
         Statistics.context = context.getApplicationContext();
-        sharedInstance().init(context, serverUrl, appKey, deviceId);
+        CountlyConfig config = new CountlyConfig();
+        config.setServerURL(serverUrl);
+        config.setAppKey(appKey);
+        config.setDeviceId(deviceId);
+        sharedInstance().init(config);
     }
 }

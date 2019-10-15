@@ -23,10 +23,11 @@ import java.util.LinkedList;
 import java.util.Map;
 
 /**
- * @author levislv
+ * @author LevisLv
  * @email  levislv@levislv.com
  * @blog   https://blog.levislv.com/
- * @github https://github.com/levislv/
+ * @book   https://book.levislv.com/
+ * @github https://github.com/LevisLv/
  */
 public class StatisticsActivityHelper {
 
