@@ -29,12 +29,8 @@ public class StatisticsFragmentHelper {
     private static final String TAG = StatisticsFragmentHelper.class.getSimpleName();
     private static final String TAG_PAGE = StatisticsFragmentHelper.class.getSimpleName() + "_Fragment";
 
-    private static void setPage(Object object, String pkgName, int pageId, String pageName, String pageData) {
+    private static void setPage(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
         try {
-            if (!(object instanceof Fragment)) {
-                return;
-            }
-            Fragment fragment = (Fragment) object;
             View view = fragment.getView();
             if (view == null) {
                 return;
@@ -70,24 +66,16 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    public static void onViewCreated(Object object, String pkgName, int pageId, String pageName, String pageData) {
+    public static void onViewCreated(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
         try {
-            if (!(object instanceof Fragment)) {
-                return;
-            }
-            Fragment fragment = (Fragment) object;
             setPage(fragment, pkgName, pageId, pageName, pageData);
         } catch (Throwable throwable) {
             Log.e(TAG, "onViewCreated", throwable);
         }
     }
 
-    public static void onResume(Object object, String pkgName, int pageId, String pageName, String pageData) {
+    public static void onResume(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
         try {
-            if (!(object instanceof Fragment)) {
-                return;
-            }
-            Fragment fragment = (Fragment) object;
             View view = fragment.getView();
             if (view == null) {
                 return;
@@ -110,12 +98,8 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    public static void onPause(Object object, String pkgName, int pageId, String pageName, String pageData) {
+    public static void onPause(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
         try {
-            if (!(object instanceof Fragment)) {
-                return;
-            }
-            Fragment fragment = (Fragment) object;
             View view = fragment.getView();
             if (view == null) {
                 return;
@@ -138,12 +122,8 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    public static void onDestroy(Object object, String pkgName, int pageId, String pageName, String pageData) {
+    public static void onDestroy(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
         try {
-            if (!(object instanceof Fragment)) {
-                return;
-            }
-            Fragment fragment = (Fragment) object;
             View view = fragment.getView();
             if (view == null) {
                 return;
@@ -158,12 +138,8 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    public static void setUserVisibleHint(Object object, String pkgName, int pageId, String pageName, String pageData) {
+    public static void setUserVisibleHint(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
         try {
-            if (!(object instanceof Fragment)) {
-                return;
-            }
-            Fragment fragment = (Fragment) object;
             View view = fragment.getView();
             if (view == null) {
                 return;
@@ -201,12 +177,8 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    public static void onHiddenChanged(Object object, String pkgName, int pageId, String pageName, String data) {
+    public static void onHiddenChanged(Fragment fragment, String pkgName, int pageId, String pageName, String data) {
         try {
-            if (!(object instanceof Fragment)) {
-                return;
-            }
-            Fragment fragment = (Fragment) object;
             View view = fragment.getView();
             if (view == null) {
                 return;
@@ -248,12 +220,8 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    private static void onPageEnterOrExit(Object object, String pkgName, boolean enter) {
+    private static void onPageEnterOrExit(Fragment fragment, String pkgName, boolean enter) {
         try {
-            if (!(object instanceof Fragment)) {
-                return;
-            }
-            Fragment fragment = (Fragment) object;
             View view = fragment.getView();
             if (view == null) {
                 return;
@@ -277,20 +245,16 @@ public class StatisticsFragmentHelper {
     /**
      * 封装segmentation
      *
-     * @param object   页面
+     * @param fragment 页面
      * @param pkgName  包名
      * @param pageId   页面id
      * @param pageName 页面name
      * @param pageData 页面data
      * @return segmentation
      */
-    private static Map<String, String> getSegmentation(Object object, String pkgName, int pageId, String pageName, String pageData) {
+    private static Map<String, String> getSegmentation(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
         Map<String, String> segmentation = new HashMap<>();
         try {
-            if (!(object instanceof Fragment)) {
-                return segmentation;
-            }
-            Fragment fragment = (Fragment) object;
             Activity activity = fragment.getActivity();
             if (activity == null || pageId <= 0) {
                 return segmentation;
