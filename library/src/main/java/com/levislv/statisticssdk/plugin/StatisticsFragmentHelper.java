@@ -29,18 +29,23 @@ public class StatisticsFragmentHelper {
     private static final String TAG = StatisticsFragmentHelper.class.getSimpleName();
     private static final String TAG_PAGE = StatisticsFragmentHelper.class.getSimpleName() + "_Fragment";
 
-    private static void setPage(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
+    private static void setPage(Object object, String pkgName, int pageId, String pageName, String pageData) {
         try {
+            if (!(object instanceof Fragment)) {
+                return;
+            }
+            Fragment fragment = (Fragment) object;
             View view = fragment.getView();
-            if (view != null) {
-                view.setTag(StatisticsTagConsts.Page.TAG_KEY_PKG_NAME, pkgName);
-                view.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_ID, pageId);
-                view.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_NAME, pageName);
-                view.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_DATA, pageData);
+            if (view == null) {
+                return;
+            }
+            view.setTag(StatisticsTagConsts.Page.TAG_KEY_PKG_NAME, pkgName);
+            view.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_ID, pageId);
+            view.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_NAME, pageName);
+            view.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_DATA, pageData);
 
-                if (view instanceof ViewGroup) {
-                    setRootView((ViewGroup) view, view);
-                }
+            if (view instanceof ViewGroup) {
+                setRootView((ViewGroup) view, view);
             }
         } catch (Throwable throwable) {
             Log.e(TAG, "setPage", throwable);
@@ -65,31 +70,39 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    public static void onViewCreated(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
+    public static void onViewCreated(Object object, String pkgName, int pageId, String pageName, String pageData) {
         try {
+            if (!(object instanceof Fragment)) {
+                return;
+            }
+            Fragment fragment = (Fragment) object;
             setPage(fragment, pkgName, pageId, pageName, pageData);
         } catch (Throwable throwable) {
             Log.e(TAG, "onViewCreated", throwable);
         }
     }
 
-    public static void onResume(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
+    public static void onResume(Object object, String pkgName, int pageId, String pageName, String pageData) {
         try {
+            if (!(object instanceof Fragment)) {
+                return;
+            }
+            Fragment fragment = (Fragment) object;
+            View view = fragment.getView();
+            if (view == null) {
+                return;
+            }
             Fragment parentFragment = fragment.getParentFragment();
             if (parentFragment == null) {
                 if (fragment.getUserVisibleHint() && !fragment.isHidden()) {
                     onPageEnterOrExit(fragment, pkgName, true);
-                    if (fragment.getView() != null) {
-                        fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
-                    }
+                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
                 }
             } else {
                 if (fragment.getUserVisibleHint() && !fragment.isHidden()
                         && parentFragment.getUserVisibleHint() && !parentFragment.isHidden()) {
                     onPageEnterOrExit(fragment, pkgName, true);
-                    if (fragment.getView() != null) {
-                        fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
-                    }
+                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
                 }
             }
         } catch (Throwable throwable) {
@@ -97,23 +110,27 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    public static void onPause(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
+    public static void onPause(Object object, String pkgName, int pageId, String pageName, String pageData) {
         try {
+            if (!(object instanceof Fragment)) {
+                return;
+            }
+            Fragment fragment = (Fragment) object;
+            View view = fragment.getView();
+            if (view == null) {
+                return;
+            }
             Fragment parentFragment = fragment.getParentFragment();
             if (parentFragment == null) {
                 if (fragment.getUserVisibleHint() && !fragment.isHidden()) {
                     onPageEnterOrExit(fragment, pkgName, false);
-                    if (fragment.getView() != null) {
-                        fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
-                    }
+                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
                 }
             } else {
                 if (fragment.getUserVisibleHint() && !fragment.isHidden()
                         && parentFragment.getUserVisibleHint() && !parentFragment.isHidden()) {
                     onPageEnterOrExit(fragment, pkgName, false);
-                    if (fragment.getView() != null) {
-                        fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
-                    }
+                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
                 }
             }
         } catch (Throwable throwable) {
@@ -121,37 +138,47 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    public static void onDestroy(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
+    public static void onDestroy(Object object, String pkgName, int pageId, String pageName, String pageData) {
         try {
-            if (fragment.getView() != null) {
-                Object tag = fragment.getView().getTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND);
-                if (tag instanceof Boolean && (boolean) tag) {
-                    onPageEnterOrExit(fragment, pkgName, false);
-                    fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
-                }
+            if (!(object instanceof Fragment)) {
+                return;
+            }
+            Fragment fragment = (Fragment) object;
+            View view = fragment.getView();
+            if (view == null) {
+                return;
+            }
+            Object tag = view.getTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND);
+            if (tag instanceof Boolean && (boolean) tag) {
+                onPageEnterOrExit(fragment, pkgName, false);
+                view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
             }
         } catch (Throwable throwable) {
             Log.e(TAG, "onDestroy", throwable);
         }
     }
 
-    public static void setUserVisibleHint(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
+    public static void setUserVisibleHint(Object object, String pkgName, int pageId, String pageName, String pageData) {
         try {
+            if (!(object instanceof Fragment)) {
+                return;
+            }
+            Fragment fragment = (Fragment) object;
+            View view = fragment.getView();
+            if (view == null) {
+                return;
+            }
             Fragment parentFragment = fragment.getParentFragment();
             if (parentFragment == null) {
                 if (fragment.getUserVisibleHint()) {
                     if (fragment.isResumed() && !fragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, true);
-                        if (fragment.getView() != null) {
-                            fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
-                        }
+                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
                     }
                 } else {
                     if (fragment.isResumed() && !fragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, false);
-                        if (fragment.getView() != null) {
-                            fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
-                        }
+                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
                     }
                 }
             } else {
@@ -159,17 +186,13 @@ public class StatisticsFragmentHelper {
                     if (fragment.isResumed() && !fragment.isHidden()
                             && parentFragment.getUserVisibleHint() && parentFragment.isResumed() && !parentFragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, true);
-                        if (fragment.getView() != null) {
-                            fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
-                        }
+                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
                     }
                 } else {
                     if (fragment.isResumed() && !fragment.isHidden()
                             && parentFragment.getUserVisibleHint() && parentFragment.isResumed() && !parentFragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, false);
-                        if (fragment.getView() != null) {
-                            fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
-                        }
+                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
                     }
                 }
             }
@@ -178,26 +201,30 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    public static void onHiddenChanged(Fragment fragment, String pkgName, int pageId, String pageName, String data) {
+    public static void onHiddenChanged(Object object, String pkgName, int pageId, String pageName, String data) {
         try {
+            if (!(object instanceof Fragment)) {
+                return;
+            }
+            Fragment fragment = (Fragment) object;
+            View view = fragment.getView();
+            if (view == null) {
+                return;
+            }
             Fragment parentFragment = fragment.getParentFragment();
             if (parentFragment == null) {
                 if (!fragment.isHidden()) {
                     if (fragment.isResumed()) {
                         if (fragment.getUserVisibleHint()) {
                             onPageEnterOrExit(fragment, pkgName, true);
-                            if (fragment.getView() != null) {
-                                fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
-                            }
+                            view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
                         }
                     }
                 } else {
                     if (fragment.isResumed()) {
                         if (fragment.getUserVisibleHint()) {
                             onPageEnterOrExit(fragment, pkgName, false);
-                            if (fragment.getView() != null) {
-                                fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
-                            }
+                            view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
                         }
                     }
                 }
@@ -206,17 +233,13 @@ public class StatisticsFragmentHelper {
                     if (fragment.isResumed() && fragment.getUserVisibleHint()
                             && parentFragment.isResumed() && parentFragment.getUserVisibleHint() && !parentFragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, true);
-                        if (fragment.getView() != null) {
-                            fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
-                        }
+                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
                     }
                 } else {
                     if (fragment.isResumed() && fragment.getUserVisibleHint()
                             && parentFragment.isResumed() && parentFragment.getUserVisibleHint() && !parentFragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, false);
-                        if (fragment.getView() != null) {
-                            fragment.getView().setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
-                        }
+                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
                     }
                 }
             }
@@ -225,9 +248,16 @@ public class StatisticsFragmentHelper {
         }
     }
 
-    private static void onPageEnterOrExit(Fragment fragment, String pkgName, boolean enter) {
+    private static void onPageEnterOrExit(Object object, String pkgName, boolean enter) {
         try {
+            if (!(object instanceof Fragment)) {
+                return;
+            }
+            Fragment fragment = (Fragment) object;
             View view = fragment.getView();
+            if (view == null) {
+                return;
+            }
             int pageId = (int) view.getTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_ID);
             String pageName = String.valueOf(view.getTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_NAME));
             String pageData = String.valueOf(view.getTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_DATA));
@@ -247,27 +277,30 @@ public class StatisticsFragmentHelper {
     /**
      * 封装segmentation
      *
-     * @param fragment 页面
+     * @param object   页面
      * @param pkgName  包名
      * @param pageId   页面id
      * @param pageName 页面name
      * @param pageData 页面data
      * @return segmentation
      */
-    private static Map<String, String> getSegmentation(Fragment fragment, String pkgName, int pageId, String pageName, String pageData) {
+    private static Map<String, String> getSegmentation(Object object, String pkgName, int pageId, String pageName, String pageData) {
         Map<String, String> segmentation = new HashMap<>();
         try {
-            // page_id
-            Activity activity = fragment.getActivity();
-            if (activity != null && pageId > 0) {
-                segmentation.put("page_id", Utils.getLayoutResEntryName(activity, pkgName, pageId));
+            if (!(object instanceof Fragment)) {
+                return segmentation;
             }
+            Fragment fragment = (Fragment) object;
+            Activity activity = fragment.getActivity();
+            if (activity == null || pageId <= 0) {
+                return segmentation;
+            }
+            // page_id
+            segmentation.put("page_id", Utils.getLayoutResEntryName(activity, pkgName, pageId));
             // page_name
             segmentation.put("page_name", pageName);
             // page_type
-            if (activity != null) {
-                segmentation.put("page_type", fragment.getClass().getName().substring(activity.getPackageName().length()));
-            }
+            segmentation.put("page_type", fragment.getClass().getName().substring(activity.getPackageName().length()));
             // data
             JSONObject jsonObject = new JSONObject(pageData);
             Iterator<String> keys = jsonObject.keys();

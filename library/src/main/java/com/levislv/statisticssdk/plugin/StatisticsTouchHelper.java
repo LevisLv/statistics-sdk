@@ -13,8 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
-import androidx.annotation.NonNull;
-
 import com.levislv.statisticssdk.Statistics;
 import com.levislv.statisticssdk.plugin.bean.StatisticsView;
 import com.levislv.statisticssdk.plugin.util.StatisticsTouchUtils;
@@ -64,7 +62,7 @@ public class StatisticsTouchHelper {
      * @param statisticsView statisticsView
      * @return segmentation
      */
-    private static Map<String, String> getSegmentation(@NonNull StatisticsView statisticsView) {
+    private static Map<String, String> getSegmentation(StatisticsView statisticsView) {
         Map<String, String> segmentation = new HashMap<>();
         try {
             String pkgName = statisticsView.getPkgName();
