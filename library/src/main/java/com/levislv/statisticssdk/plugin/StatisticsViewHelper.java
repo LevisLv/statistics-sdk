@@ -10,8 +10,8 @@ import android.widget.ExpandableListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.levislv.statisticssdk.R;
 import com.levislv.statisticssdk.Statistics;
-import com.levislv.statisticssdk.plugin.constant.StatisticsTagConsts;
 import com.levislv.statisticssdk.util.Utils;
 
 import org.json.JSONObject;
@@ -52,7 +52,7 @@ public class StatisticsViewHelper {
     public static void onTouch(String pkgName, int pageId, String pageName, View view) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, view));
-            Object motionEvent = view.getTag(StatisticsTagConsts.View.OnTouchListener.TAG_KEY_MOTION_EVENT);
+            Object motionEvent = view.getTag(R.id.Statistics_View_OnTouchListener_TAG_KEY_MOTION_EVENT);
             if (motionEvent instanceof MotionEvent) {
                 segmentation.put("motion_event", String.valueOf((MotionEvent) motionEvent));
             }
@@ -65,7 +65,7 @@ public class StatisticsViewHelper {
     public static void onFocusChange(String pkgName, int pageId, String pageName, View view) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, view));
-            Object hasFocus = view.getTag(StatisticsTagConsts.View.OnFocusChangeListener.TAG_KEY_HAS_FOCUS);
+            Object hasFocus = view.getTag(R.id.Statistics_View_OnFocusChangeListener_TAG_KEY_HAS_FOCUS);
             if (hasFocus instanceof Boolean) {
                 segmentation.put("has_focus", String.valueOf((boolean) hasFocus));
             }
@@ -78,11 +78,11 @@ public class StatisticsViewHelper {
     public static void onEditorAction(String pkgName, int pageId, String pageName, View textView) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, textView));
-            Object actionId = textView.getTag(StatisticsTagConsts.TextView.OnEditorActionListener.TAG_KEY_ACTION_ID);
+            Object actionId = textView.getTag(R.id.Statistics_TextView_OnEditorActionListener_TAG_KEY_ACTION_ID);
             if (actionId instanceof Integer) {
                 segmentation.put("action_id", String.valueOf((int) actionId));
             }
-            Object keyEvent = textView.getTag(StatisticsTagConsts.TextView.OnEditorActionListener.TAG_KEY_KEY_EVENT);
+            Object keyEvent = textView.getTag(R.id.Statistics_TextView_OnEditorActionListener_TAG_KEY_KEY_EVENT);
             if (keyEvent instanceof KeyEvent) {
                 segmentation.put("key_event", String.valueOf((KeyEvent) keyEvent));
             }
@@ -96,12 +96,12 @@ public class StatisticsViewHelper {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, view));
             if (view instanceof CompoundButton) {
-                Object isChecked = view.getTag(StatisticsTagConsts.CompoundButton.OnCheckedChangeListener.TAG_KEY_IS_CHECKED);
+                Object isChecked = view.getTag(R.id.Statistics_CompoundButton_OnCheckedChangeListener_TAG_KEY_IS_CHECKED);
                 if (isChecked instanceof Boolean) {
                     segmentation.put("is_checked", String.valueOf((boolean) isChecked));
                 }
             } else if (view instanceof RadioGroup) {
-                Object checkedId = view.getTag(StatisticsTagConsts.RadioGroup.OnCheckedChangeListener.TAG_KEY_CHECKED_ID);
+                Object checkedId = view.getTag(R.id.Statistics_RadioGroup_OnCheckedChangeListener_TAG_KEY_CHECKED_ID);
                 if (checkedId instanceof Integer) {
                     segmentation.put("checked_id", String.valueOf((int) checkedId));
                 }
@@ -115,11 +115,11 @@ public class StatisticsViewHelper {
     public static void onProgressChanged(String pkgName, int pageId, String pageName, View seekBar) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, seekBar));
-            Object progress = seekBar.getTag(StatisticsTagConsts.SeekBar.OnSeekBarChangeListener.TAG_KEY_PROGRESS);
+            Object progress = seekBar.getTag(R.id.Statistics_SeekBar_OnSeekBarChangeListener_TAG_KEY_PROGRESS);
             if (progress instanceof Integer) {
                 segmentation.put("progress", String.valueOf((int) progress));
             }
-            Object fromUser = seekBar.getTag(StatisticsTagConsts.SeekBar.OnSeekBarChangeListener.TAG_KEY_FROM_USER);
+            Object fromUser = seekBar.getTag(R.id.Statistics_SeekBar_OnSeekBarChangeListener_TAG_KEY_FROM_USER);
             if (fromUser instanceof Boolean) {
                 segmentation.put("from_user", String.valueOf((boolean) fromUser));
             }
@@ -150,11 +150,11 @@ public class StatisticsViewHelper {
     public static void onRatingChanged(String pkgName, int pageId, String pageName, View ratingBar) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, ratingBar));
-            Object rating = ratingBar.getTag(StatisticsTagConsts.RatingBar.OnRatingBarChangeListener.TAG_KEY_RATING);
+            Object rating = ratingBar.getTag(R.id.Statistics_RatingBar_OnRatingBarChangeListener_TAG_KEY_RATING);
             if (rating instanceof Float) {
                 segmentation.put("rating", String.valueOf((float) rating));
             }
-            Object fromUser = ratingBar.getTag(StatisticsTagConsts.RatingBar.OnRatingBarChangeListener.TAG_KEY_FROM_USER);
+            Object fromUser = ratingBar.getTag(R.id.Statistics_RatingBar_OnRatingBarChangeListener_TAG_KEY_FROM_USER);
             if (fromUser instanceof Boolean) {
                 segmentation.put("from_user", String.valueOf((boolean) fromUser));
             }
@@ -167,17 +167,17 @@ public class StatisticsViewHelper {
     public static void onItemClick(String pkgName, int pageId, String pageName, View view) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, view));
-            Object parent = view.getTag(StatisticsTagConsts.AdapterView.OnItemClickListener.TAG_KEY_PARENT);
+            Object parent = view.getTag(R.id.Statistics_AdapterView_OnItemClickListener_TAG_KEY_PARENT);
             if (parent instanceof AdapterView) {
                 AdapterView adapterView = (AdapterView) parent;
                 segmentation.put("parent_id", Utils.getIdResEntryName(adapterView.getContext(), adapterView.getId()));
                 segmentation.put("parent_name", String.valueOf(adapterView.getContentDescription()));
             }
-            Object itemPosition = view.getTag(StatisticsTagConsts.AdapterView.OnItemClickListener.TAG_KEY_ITEM_POSITION);
+            Object itemPosition = view.getTag(R.id.Statistics_AdapterView_OnItemClickListener_TAG_KEY_ITEM_POSITION);
             if (itemPosition instanceof Integer) {
                 segmentation.put("item_position", String.valueOf((int) itemPosition));
             }
-            Object itemId = view.getTag(StatisticsTagConsts.AdapterView.OnItemClickListener.TAG_KEY_ITEM_ID);
+            Object itemId = view.getTag(R.id.Statistics_AdapterView_OnItemClickListener_TAG_KEY_ITEM_ID);
             if (itemId instanceof Long) {
                 segmentation.put("item_id", String.valueOf((long) itemId));
             }
@@ -190,17 +190,17 @@ public class StatisticsViewHelper {
     public static void onItemLongClick(String pkgName, int pageId, String pageName, View view) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, view));
-            Object parent = view.getTag(StatisticsTagConsts.AdapterView.OnItemLongClickListener.TAG_KEY_PARENT);
+            Object parent = view.getTag(R.id.Statistics_AdapterView_OnItemLongClickListener_TAG_KEY_PARENT);
             if (parent instanceof AdapterView) {
                 AdapterView adapterView = (AdapterView) parent;
                 segmentation.put("parent_id", Utils.getIdResEntryName(adapterView.getContext(), adapterView.getId()));
                 segmentation.put("parent_name", String.valueOf(adapterView.getContentDescription()));
             }
-            Object itemPosition = view.getTag(StatisticsTagConsts.AdapterView.OnItemLongClickListener.TAG_KEY_ITEM_POSITION);
+            Object itemPosition = view.getTag(R.id.Statistics_AdapterView_OnItemLongClickListener_TAG_KEY_ITEM_POSITION);
             if (itemPosition instanceof Integer) {
                 segmentation.put("item_position", String.valueOf((int) itemPosition));
             }
-            Object itemId = view.getTag(StatisticsTagConsts.AdapterView.OnItemLongClickListener.TAG_KEY_ITEM_ID);
+            Object itemId = view.getTag(R.id.Statistics_AdapterView_OnItemLongClickListener_TAG_KEY_ITEM_ID);
             if (itemId instanceof Long) {
                 segmentation.put("item_id", String.valueOf((long) itemId));
             }
@@ -213,17 +213,17 @@ public class StatisticsViewHelper {
     public static void onItemSelected(String pkgName, int pageId, String pageName, View view) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, view));
-            Object parent = view.getTag(StatisticsTagConsts.AdapterView.OnItemSelectedListener.TAG_KEY_PARENT);
+            Object parent = view.getTag(R.id.Statistics_AdapterView_OnItemSelectedListener_TAG_KEY_PARENT);
             if (parent instanceof AdapterView) {
                 AdapterView adapterView = (AdapterView) parent;
                 segmentation.put("parent_id", Utils.getIdResEntryName(adapterView.getContext(), adapterView.getId()));
                 segmentation.put("parent_name", String.valueOf(adapterView.getContentDescription()));
             }
-            Object itemPosition = view.getTag(StatisticsTagConsts.AdapterView.OnItemSelectedListener.TAG_KEY_ITEM_POSITION);
+            Object itemPosition = view.getTag(R.id.Statistics_AdapterView_OnItemSelectedListener_TAG_KEY_ITEM_POSITION);
             if (itemPosition instanceof Integer) {
                 segmentation.put("item_position", String.valueOf((int) itemPosition));
             }
-            Object itemId = view.getTag(StatisticsTagConsts.AdapterView.OnItemSelectedListener.TAG_KEY_ITEM_ID);
+            Object itemId = view.getTag(R.id.Statistics_AdapterView_OnItemSelectedListener_TAG_KEY_ITEM_ID);
             if (itemId instanceof Long) {
                 segmentation.put("item_id", String.valueOf((long) itemId));
             }
@@ -236,17 +236,17 @@ public class StatisticsViewHelper {
     public static void onGroupClick(String pkgName, int pageId, String pageName, View view) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, view));
-            Object parent = view.getTag(StatisticsTagConsts.ExpandableListView.OnGroupClickListener.TAG_KEY_PARENT);
+            Object parent = view.getTag(R.id.Statistics_ExpandableListView_OnGroupClickListener_TAG_KEY_PARENT);
             if (parent instanceof ExpandableListView) {
                 ExpandableListView expandableListView = (ExpandableListView) parent;
                 segmentation.put("parent_id", Utils.getIdResEntryName(expandableListView.getContext(), expandableListView.getId()));
                 segmentation.put("parent_name", String.valueOf(expandableListView.getContentDescription()));
             }
-            Object itemPosition = view.getTag(StatisticsTagConsts.ExpandableListView.OnGroupClickListener.TAG_KEY_ITEM_POSITION);
+            Object itemPosition = view.getTag(R.id.Statistics_ExpandableListView_OnGroupClickListener_TAG_KEY_ITEM_POSITION);
             if (itemPosition instanceof Integer) {
                 segmentation.put("item_position", String.valueOf((int) itemPosition));
             }
-            Object itemId = view.getTag(StatisticsTagConsts.ExpandableListView.OnGroupClickListener.TAG_KEY_ITEM_ID);
+            Object itemId = view.getTag(R.id.Statistics_ExpandableListView_OnGroupClickListener_TAG_KEY_ITEM_ID);
             if (itemId instanceof Long) {
                 segmentation.put("item_id", String.valueOf((long) itemId));
             }
@@ -259,21 +259,21 @@ public class StatisticsViewHelper {
     public static void onChildClick(String pkgName, int pageId, String pageName, View view) {
         try {
             Map<String, String> segmentation = new HashMap<>(getSegmentation(pkgName, pageId, pageName, view));
-            Object parent = view.getTag(StatisticsTagConsts.ExpandableListView.OnChildClickListener.TAG_KEY_PARENT);
+            Object parent = view.getTag(R.id.Statistics_ExpandableListView_OnChildClickListener_TAG_KEY_PARENT);
             if (parent instanceof ExpandableListView) {
                 ExpandableListView expandableListView = (ExpandableListView) parent;
                 segmentation.put("parent_id", Utils.getIdResEntryName(expandableListView.getContext(), expandableListView.getId()));
                 segmentation.put("parent_name", String.valueOf(expandableListView.getContentDescription()));
             }
-            Object itemGroupPosition = view.getTag(StatisticsTagConsts.ExpandableListView.OnChildClickListener.TAG_KEY_GROUP_POSITION);
+            Object itemGroupPosition = view.getTag(R.id.Statistics_ExpandableListView_OnChildClickListener_TAG_KEY_GROUP_POSITION);
             if (itemGroupPosition instanceof Integer) {
                 segmentation.put("item_group_position", String.valueOf((int) itemGroupPosition));
             }
-            Object itemChildPosition = view.getTag(StatisticsTagConsts.ExpandableListView.OnChildClickListener.TAG_KEY_CHILD_POSITION);
+            Object itemChildPosition = view.getTag(R.id.Statistics_ExpandableListView_OnChildClickListener_TAG_KEY_CHILD_POSITION);
             if (itemChildPosition instanceof Integer) {
                 segmentation.put("item_child_position", String.valueOf((int) itemChildPosition));
             }
-            Object itemId = view.getTag(StatisticsTagConsts.ExpandableListView.OnChildClickListener.TAG_KEY_ITEM_ID);
+            Object itemId = view.getTag(R.id.Statistics_ExpandableListView_OnChildClickListener_TAG_KEY_ITEM_ID);
             if (itemId instanceof Long) {
                 segmentation.put("item_id", String.valueOf((long) itemId));
             }
@@ -286,7 +286,6 @@ public class StatisticsViewHelper {
     /**
      * 封装segmentation
      *
-     * @param pkgName  包名
      * @param pageId   页面id
      * @param pageName 页面name
      * @param view     控件

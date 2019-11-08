@@ -5,14 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.levislv.statisticssdk.R;
 import com.levislv.statisticssdk.plugin.bean.StatisticsView;
-import com.levislv.statisticssdk.plugin.constant.StatisticsTagConsts;
 
 /**
  * @author LevisLv
- * @email  levislv@levislv.com
- * @blog   https://blog.levislv.com/
- * @book   https://book.levislv.com/
+ * @email levislv@levislv.com
+ * @blog https://blog.levislv.com/
+ * @book https://book.levislv.com/
  * @github https://github.com/LevisLv/
  */
 public class StatisticsTouchUtils {
@@ -24,8 +24,8 @@ public class StatisticsTouchUtils {
         // 获取pageId和pageName
         View parentView = targetView;
         while (parentView != null) {
-            Object objectPageId = parentView.getTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_ID);
-            Object objectPageName = parentView.getTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_NAME);
+            Object objectPageId = parentView.getTag(R.id.Statistics_Page_TAG_KEY_PAGE_ID);
+            Object objectPageName = parentView.getTag(R.id.Statistics_Page_TAG_KEY_PAGE_NAME);
             if (objectPageId instanceof Integer && objectPageName instanceof String) {
                 pageId = (int) objectPageId;
                 pageName = String.valueOf(objectPageName);
@@ -55,7 +55,7 @@ public class StatisticsTouchUtils {
                 }
                 targetView = findViewByXY(viewGroup.getChildAt(index), x, y);
                 if (targetView != null) {
-                    Object objectRootView = targetView.getTag(StatisticsTagConsts.Page.TAG_KEY_ROOT_VIEW);
+                    Object objectRootView = targetView.getTag(R.id.Statistics_Page_TAG_KEY_ROOT_VIEW);
                     if (objectRootView instanceof View && ((View) objectRootView).getVisibility() == View.VISIBLE) {
                         break;
                     }

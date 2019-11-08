@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.levislv.statisticssdk.R;
 import com.levislv.statisticssdk.Statistics;
-import com.levislv.statisticssdk.plugin.constant.StatisticsTagConsts;
 import com.levislv.statisticssdk.util.Utils;
 
 import org.json.JSONObject;
@@ -35,10 +35,10 @@ public class StatisticsFragmentHelper {
             if (view == null) {
                 return;
             }
-            view.setTag(StatisticsTagConsts.Page.TAG_KEY_PKG_NAME, pkgName);
-            view.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_ID, pageId);
-            view.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_NAME, pageName);
-            view.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_DATA, pageData);
+            view.setTag(R.id.Statistics_Page_TAG_KEY_PKG_NAME, pkgName);
+            view.setTag(R.id.Statistics_Page_TAG_KEY_PAGE_ID, pageId);
+            view.setTag(R.id.Statistics_Page_TAG_KEY_PAGE_NAME, pageName);
+            view.setTag(R.id.Statistics_Page_TAG_KEY_PAGE_DATA, pageData);
 
             if (view instanceof ViewGroup) {
                 setRootView((ViewGroup) view, view);
@@ -51,14 +51,14 @@ public class StatisticsFragmentHelper {
     private static void setRootView(ViewGroup viewGroup, View rootView) {
         try {
             if (viewGroup != rootView) {
-                viewGroup.setTag(StatisticsTagConsts.Page.TAG_KEY_ROOT_VIEW, rootView);
+                viewGroup.setTag(R.id.Statistics_Page_TAG_KEY_ROOT_VIEW, rootView);
             }
             for (int index = 0; index < viewGroup.getChildCount(); index++) {
                 View view = viewGroup.getChildAt(index);
                 if (view instanceof ViewGroup) {
                     setRootView((ViewGroup) view, rootView);
                 } else {
-                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_ROOT_VIEW, rootView);
+                    view.setTag(R.id.Statistics_Page_TAG_KEY_ROOT_VIEW, rootView);
                 }
             }
         } catch (Throwable throwable) {
@@ -84,13 +84,13 @@ public class StatisticsFragmentHelper {
             if (parentFragment == null) {
                 if (fragment.getUserVisibleHint() && !fragment.isHidden()) {
                     onPageEnterOrExit(fragment, pkgName, true);
-                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
+                    view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, true);
                 }
             } else {
                 if (fragment.getUserVisibleHint() && !fragment.isHidden()
                         && parentFragment.getUserVisibleHint() && !parentFragment.isHidden()) {
                     onPageEnterOrExit(fragment, pkgName, true);
-                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
+                    view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, true);
                 }
             }
         } catch (Throwable throwable) {
@@ -108,13 +108,13 @@ public class StatisticsFragmentHelper {
             if (parentFragment == null) {
                 if (fragment.getUserVisibleHint() && !fragment.isHidden()) {
                     onPageEnterOrExit(fragment, pkgName, false);
-                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
+                    view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, false);
                 }
             } else {
                 if (fragment.getUserVisibleHint() && !fragment.isHidden()
                         && parentFragment.getUserVisibleHint() && !parentFragment.isHidden()) {
                     onPageEnterOrExit(fragment, pkgName, false);
-                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
+                    view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, false);
                 }
             }
         } catch (Throwable throwable) {
@@ -128,10 +128,10 @@ public class StatisticsFragmentHelper {
             if (view == null) {
                 return;
             }
-            Object tag = view.getTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND);
+            Object tag = view.getTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND);
             if (tag instanceof Boolean && (boolean) tag) {
                 onPageEnterOrExit(fragment, pkgName, false);
-                view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
+                view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, false);
             }
         } catch (Throwable throwable) {
             Log.e(TAG, "onDestroy", throwable);
@@ -149,12 +149,12 @@ public class StatisticsFragmentHelper {
                 if (fragment.getUserVisibleHint()) {
                     if (fragment.isResumed() && !fragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, true);
-                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
+                        view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, true);
                     }
                 } else {
                     if (fragment.isResumed() && !fragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, false);
-                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
+                        view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, false);
                     }
                 }
             } else {
@@ -162,13 +162,13 @@ public class StatisticsFragmentHelper {
                     if (fragment.isResumed() && !fragment.isHidden()
                             && parentFragment.getUserVisibleHint() && parentFragment.isResumed() && !parentFragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, true);
-                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
+                        view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, true);
                     }
                 } else {
                     if (fragment.isResumed() && !fragment.isHidden()
                             && parentFragment.getUserVisibleHint() && parentFragment.isResumed() && !parentFragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, false);
-                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
+                        view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, false);
                     }
                 }
             }
@@ -189,14 +189,14 @@ public class StatisticsFragmentHelper {
                     if (fragment.isResumed()) {
                         if (fragment.getUserVisibleHint()) {
                             onPageEnterOrExit(fragment, pkgName, true);
-                            view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
+                            view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, true);
                         }
                     }
                 } else {
                     if (fragment.isResumed()) {
                         if (fragment.getUserVisibleHint()) {
                             onPageEnterOrExit(fragment, pkgName, false);
-                            view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
+                            view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, false);
                         }
                     }
                 }
@@ -205,13 +205,13 @@ public class StatisticsFragmentHelper {
                     if (fragment.isResumed() && fragment.getUserVisibleHint()
                             && parentFragment.isResumed() && parentFragment.getUserVisibleHint() && !parentFragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, true);
-                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, true);
+                        view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, true);
                     }
                 } else {
                     if (fragment.isResumed() && fragment.getUserVisibleHint()
                             && parentFragment.isResumed() && parentFragment.getUserVisibleHint() && !parentFragment.isHidden()) {
                         onPageEnterOrExit(fragment, pkgName, false);
-                        view.setTag(StatisticsTagConsts.Page.TAG_KEY_FOREGROUND, false);
+                        view.setTag(R.id.Statistics_Page_TAG_KEY_FOREGROUND, false);
                     }
                 }
             }
@@ -226,9 +226,9 @@ public class StatisticsFragmentHelper {
             if (view == null) {
                 return;
             }
-            int pageId = (int) view.getTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_ID);
-            String pageName = String.valueOf(view.getTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_NAME));
-            String pageData = String.valueOf(view.getTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_DATA));
+            int pageId = (int) view.getTag(R.id.Statistics_Page_TAG_KEY_PAGE_ID);
+            String pageName = String.valueOf(view.getTag(R.id.Statistics_Page_TAG_KEY_PAGE_NAME));
+            String pageData = String.valueOf(view.getTag(R.id.Statistics_Page_TAG_KEY_PAGE_DATA));
             Map<String, String> segmentation = new HashMap<>(getSegmentation(fragment, pkgName, pageId, pageName, pageData));
             if (enter) {
                 Statistics.sharedInstance().recordEvent("common_PageEnter", segmentation, 1);
