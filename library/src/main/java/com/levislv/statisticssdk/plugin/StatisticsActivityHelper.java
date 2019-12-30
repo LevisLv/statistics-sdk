@@ -6,10 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.levislv.statisticssdk.R;
 import com.levislv.statisticssdk.Statistics;
 import com.levislv.statisticssdk.plugin.bean.StatisticsPage;
 import com.levislv.statisticssdk.plugin.constant.StatisticsSpConsts;
+import com.levislv.statisticssdk.plugin.constant.StatisticsTagConsts;
 import com.levislv.statisticssdk.plugin.util.StatisticsSpUtils;
 import com.levislv.statisticssdk.util.Utils;
 
@@ -43,10 +43,10 @@ public class StatisticsActivityHelper {
     private static void setPage(Activity activity, String pkgName, int pageId, String pageName, String pageData) {
         try {
             View decorView = activity.getWindow().getDecorView();
-            decorView.setTag(R.id.Statistics_Page_TAG_KEY_PKG_NAME, pkgName);
-            decorView.setTag(R.id.Statistics_Page_TAG_KEY_PAGE_ID, pageId);
-            decorView.setTag(R.id.Statistics_Page_TAG_KEY_PAGE_NAME, pageName);
-            decorView.setTag(R.id.Statistics_Page_TAG_KEY_PAGE_DATA, pageData);
+            decorView.setTag(StatisticsTagConsts.Page.TAG_KEY_PKG_NAME, pkgName);
+            decorView.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_ID, pageId);
+            decorView.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_NAME, pageName);
+            decorView.setTag(StatisticsTagConsts.Page.TAG_KEY_PAGE_DATA, pageData);
 
             if (decorView instanceof ViewGroup) {
                 setRootView((ViewGroup) decorView, decorView);
@@ -59,14 +59,14 @@ public class StatisticsActivityHelper {
     private static void setRootView(ViewGroup viewGroup, View rootView) {
         try {
             if (viewGroup != rootView) {
-                viewGroup.setTag(R.id.Statistics_Page_TAG_KEY_ROOT_VIEW, rootView);
+                viewGroup.setTag(StatisticsTagConsts.Page.TAG_KEY_ROOT_VIEW, rootView);
             }
             for (int index = 0; index < viewGroup.getChildCount(); index++) {
                 View view = viewGroup.getChildAt(index);
                 if (view instanceof ViewGroup) {
                     setRootView((ViewGroup) view, rootView);
                 } else {
-                    view.setTag(R.id.Statistics_Page_TAG_KEY_ROOT_VIEW, rootView);
+                    view.setTag(StatisticsTagConsts.Page.TAG_KEY_ROOT_VIEW, rootView);
                 }
             }
         } catch (Throwable throwable) {

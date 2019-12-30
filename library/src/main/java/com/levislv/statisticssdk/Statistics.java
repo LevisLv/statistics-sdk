@@ -33,11 +33,23 @@ public class Statistics {
      * @param deviceId
      */
     public void init(final Context context, final String serverUrl, final String appKey, final String deviceId) {
+        Thread.UncaughtExceptionHandler defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+        if (defaultUncaughtExceptionHandler == null) {
+            Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+                @Override
+                public void uncaughtException(Thread thread, Throwable throwable) {
+                    sharedInstance().recordUnhandledException(throwable);
+                }
+            });
+        }
+
         Statistics.context = context.getApplicationContext();
         CountlyConfig config = new CountlyConfig();
         config.setServerURL(serverUrl);
         config.setAppKey(appKey);
         config.setDeviceId(deviceId);
+        config.setLoggingEnabled(true);
+        config.enableCrashReporting();
         sharedInstance().init(config);
     }
 }
