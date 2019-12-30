@@ -32,7 +32,7 @@ public class Statistics {
      * @param appKey
      * @param deviceId
      */
-    public void init(final Context context, final String serverUrl, final String appKey, final String deviceId) {
+    public static void init(final Context context, final String serverUrl, final String appKey, final String deviceId) {
         Thread.UncaughtExceptionHandler defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         if (defaultUncaughtExceptionHandler == null) {
             Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
