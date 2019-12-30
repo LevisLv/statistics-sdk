@@ -45,6 +45,7 @@ public class Statistics {
 
         Statistics.context = context.getApplicationContext();
         CountlyConfig config = new CountlyConfig();
+        config.setContext(Statistics.context);
         config.setServerURL(serverUrl);
         config.setAppKey(appKey);
         config.setDeviceId(deviceId);
